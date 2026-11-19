@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  micamerapro:
+    build: .
+    image: gutolm/micamerapro:latest
+    container_name: micamerapro
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - micamerapro_data:/app/data
+    environment:
+      - PORT=${PORT:-3000}
+      - DATA_DIR=${DATA_DIR:-/app/data}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+      - XIAOMI_USER=${XIAOMI_USER:-}
+      - XIAOMI_TOKEN=${XIAOMI_TOKEN:-}
+
+volumes:
+  micamerapro_data:
+    external: true
